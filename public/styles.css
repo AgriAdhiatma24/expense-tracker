@@ -217,6 +217,7 @@ main .month-dropdown select {
   border: var(--color-info-light) solid 1px;
   width: 10rem;
   border-radius: var(--border-radius-2);
+  color: var(--color-dark);
 }
 
 /* Card Insight */
