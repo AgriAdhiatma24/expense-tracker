@@ -313,9 +313,171 @@ main .transaction-table table tbody td a span {
   font-size: 1.5rem;
 }
 
+main .transaction-table table tbody td a.delete {
+  color: var(--color-danger);
+}
+
 main .transaction-table a {
   display: block;
   text-align: center;
   margin-top: 1rem;
   color: var(--color-primary);
+}
+
+/*========== Right Side ============*/
+.right-side .top button {
+  display: none;
+}
+
+.right-side .profile-photo {
+  background: lightblue;
+  border: var(--color-danger) solid 1px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+.right-side {
+  margin-top: 1.4rem;
+}
+
+.right-side .top {
+  display: flex;
+  gap: 2rem;
+  justify-content: end;
+}
+
+.right-side .top .theme-toggler {
+  display: flex;
+}
+
+.right-side .top .theme-toggler {
+  display: flex;
+  height: 1.6rem;
+  width: 4.2rem;
+  background: var(--color-light);
+  align-items: center;
+  justify-content: space-between;
+  border-radius: var(--border-radius-1);
+  cursor: pointer;
+}
+
+.right-side .top .theme-toggler span {
+  font-size: 1.2rem;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.right-side .top .theme-toggler span.active {
+  background: var(--color-primary);
+  color: white;
+  border-radius: var(--border-radius-1);
+}
+
+.right-side .top .account-info {
+  display: flex;
+  text-align: right;
+  gap: 2rem;
+}
+
+.right-side .add-new-transaction {
+  margin-top: 2rem;
+}
+
+.right-side .add-new-transaction h2 {
+  margin-bottom: 1rem;
+}
+
+.right-side .add-new-transaction .add-transaction div {
+  display: flex;
+  border: 2px dashed var(--color-primary);
+  padding: 1.4rem var(--card-padding);
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: var(--color-primary);
+  gap: 0.7rem;
+  transition: all 300ms ease;
+}
+
+.right-side .add-new-transaction .add-transaction div:hover {
+  background: var(--color-primary);
+  color: white;
+}
+
+/* Form Styling */
+.right-side .transaction-form {
+  transition: all 300ms ease;
+}
+
+.right-side .transaction-form {
+  margin-top: 2rem;
+}
+
+.right-side .transaction-form ul.form-style li {
+  display: block;
+  list-style: none;
+  margin-top: 1rem;
+  padding: 0;
+}
+
+.right-side .transaction-form ul.form-style label {
+  display: block;
+  font-weight: 600;
+}
+
+.right-side .form-style input[type="text"],
+.right-side .form-style input[type="date"],
+.right-side .form-style input[type="datetime"],
+.right-side .form-style input[type="number"],
+.right-side textarea,
+select {
+  background: var(--color-white);
+  font-family: poppins, sans-serif;
+  border: 1px solid var(--color-info-light);
+  border-radius: var(--border-radius-2);
+  padding: 0.5rem;
+  transition: all 300ms ease-in-out;
+  outline: none;
+}
+
+.right-side .form-style input[type="text"]:focus,
+.right-side .form-style input[type="date"]:focus,
+.right-side .form-style input[type="datetime"]:focus,
+.right-side .form-style input[type="number"]:focus,
+.right-side .form-style textarea:focus,
+.right-side .form-style select:focus {
+  -moz-box-shadow: 0 0 8px #88d5e9;
+  -webkit-box-shadow: 0 0 8px #88d5e9;
+  box-shadow: 0 0 8px #88d5e9;
+  border: 1px solid #88d5e9;
+}
+
+.right-side .form-style .field-long {
+  width: 100%;
+}
+
+.right-side .form-style .field-textarea {
+  height: 5rem;
+  resize: none;
+}
+
+.right-side .form-style input[type="submit"] {
+  background: var(--color-primary);
+  padding: 8px 15px;
+  border: none;
+  color: var(--color-white);
+  border-radius: var(--border-radius-2);
+}
+
+.right-side .form-style input[type="submit"]:hover {
+  background: var(--color-primary-variant);
+  box-shadow: none;
+}
+
+.right-side .form-style .required {
+  color: red;
 }
