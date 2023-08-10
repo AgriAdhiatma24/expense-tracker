@@ -18,3 +18,12 @@ themeToggler.addEventListener("click", () => {
   themeToggler.querySelector(".light-mode").classList.toggle("active");
   themeToggler.querySelector(".dark-mode").classList.toggle("active");
 });
+
+//Show/Hide New Transaction Forms
+const formTransaction = document.querySelector(".transaction-form");
+const addTransactionButton = document.querySelector(".add-transaction");
+
+formTransaction.classList.toggle("hide");
+addTransactionButton.addEventListener("click", () => {
+  formTransaction.classList.toggle("hide");
+});

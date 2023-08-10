@@ -424,6 +424,11 @@ main .transaction-table a {
   transition: all 300ms ease;
 }
 
+.right-side .transaction-form.hide {
+  visibility: hidden;
+  opacity: 0;
+}
+
 .right-side .transaction-form {
   margin-top: 2rem;
 }
