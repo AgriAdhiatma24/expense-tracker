@@ -1,51 +1,29 @@
-const fs = require("fs");
+const db = require("../db/db.config");
 
-const loadTransaction = () => {
-  const file = fs.readFileSync("dummy/transactions.json", "utf-8");
-  const transactions = JSON.parse(file);
-  return transactions;
+const loadTransaction = async () => {
+  return await db.select("*").from("transactions");
 };
 
-const newTransaction = (transactions) => {
-  fs.writeFileSync("dummy/transactions.json", JSON.stringify(transactions));
+const newTransaction = async (transactions) => {
+  return await db("transactions").insert(transactions);
 };
 
-const addTransaction = (transaction) => {
+const addTransaction = async (transaction) => {
   const transactions = loadTransaction();
-  transactions.push(transaction);
-  newTransaction(transactions);
+  await newTransaction(transaction);
 };
 
-const updateTransaction = (id, updatedData) => {
-  let transactions = loadTransaction();
-  transactions = transactions.filter((transaction) => {
-    if (transaction.id === id) {
-      const updatedTransaction = { ...transaction, ...updatedData };
-      // This array is created by filtering out transactions with IDs equal to id and then adding the updatedTransaction object.
-      // This effectively updates the transactions array with the new transaction data.
-      newTransaction([
-        ...transactions.filter((t) => t.id !== id),
-        updatedTransaction,
-      ]);
-      return true;
-    }
-    return false;
-  });
-  return transactions.length > 0 ? transactions : null;
+const updateTransaction = async (id, updatedData) => {
+  await db("transactions").where("id", id).update(updatedData);
 };
 
-const deleteTransaction = (id) => {
+const deleteTransaction = async (id) => {
   const transactions = loadTransaction();
-  const deletedTransaction = transactions.find((txn) => txn.id === id);
-  if (deletedTransaction) {
-    const filteredTransaction = transactions.filter((txn) => txn.id !== id);
-    return newTransaction(filteredTransaction);
-  }
-  return null;
+  await db("transactions").where("id", id).del();
 };
 
-const getIncome = () => {
-  const transactions = loadTransaction();
+const getIncome = async () => {
+  const transactions = await loadTransaction();
   let totalIncome = 0;
   transactions.forEach((txn) => {
     if (txn.type === "income") {
@@ -55,8 +33,8 @@ const getIncome = () => {
   return totalIncome;
 };
 
-const getExpense = () => {
-  const transactions = loadTransaction();
+const getExpense = async () => {
+  const transactions = await loadTransaction();
   let totalExpense = 0;
   transactions.forEach((txn) => {
     if (txn.type === "expense") {
@@ -66,8 +44,8 @@ const getExpense = () => {
   return totalExpense;
 };
 
-const getBalance = () => {
-  const transactions = loadTransaction();
+const getBalance = async () => {
+  const transactions = await loadTransaction();
   let totalIncome = 0;
   let totalExpense = 0;
   transactions.forEach((txn) => {

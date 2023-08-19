@@ -1,14 +1,14 @@
-function responseOk(msg, data) {
+responseOk = (msg, data) => {
   return {
     message: msg,
     data,
   };
-}
+};
 
-function responseError(err) {
+responseError = (err) => {
   return {
     error: err,
   };
-}
+};
 
-export { responseError, responseOk };
+module.exports = { responseError, responseOk };

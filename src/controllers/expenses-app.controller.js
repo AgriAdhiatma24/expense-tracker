@@ -8,50 +8,87 @@ const {
   getIncome,
 } = require("../models/expenses-app.model.js");
 
-const getAllTxn = function getAllTxn(req, res) {
-  const transaction = loadTransaction();
-  return res.json(transaction);
-};
+const helper = require("../utils/restResp.helper.js");
 
-const addTxn = function addTxn(req, res) {
-  addTransaction(req.body);
-  return res.status(201).json({ Created: "Successfully" });
-};
-
-const updateTxn = function updateTxn(req, res) {
-  // const id = req.params["id"];
-  const id = req.params.id;
-  const body = req.body;
-  const updated = updateTransaction(id, body);
-  if (updated) {
-    return res.status(200).json({
-      message: "Transaction updated successfully",
-      updated: updated,
-    });
+getAllTxn = async (req, res) => {
+  try {
+    const transactions = await loadTransaction();
+    return res
+      .status(200)
+      .json(
+        helper.responseOk("Successfuly fetching all transactions", transactions)
+      );
+  } catch (e) {
+    console.error("Error fetching transactions: ", e);
+    return res.status(500).json(helper.responseError(e));
   }
 };
 
-const deleteTxn = function deletedTxn(req, res) {
+addTxn = async (req, res) => {
+  try {
+    await addTransaction(req.body);
+    return res.status(201).json(helper.responseOk("Created Successfuly"));
+  } catch (e) {
+    console.error("Error creating transaction: ", e);
+    return res.status(500).json(helper.responseError(e));
+  }
+};
+
+updateTxn = async (req, res) => {
   const id = req.params.id;
-  const deleted = deleteTransaction(id);
-  return res.status(200).json({
-    message: "Transaction deleted successfully",
-  });
+  const body = req.body;
+  try {
+    const updated = await updateTransaction(id, body);
+    return res
+      .status(200)
+      .json(helper.responseOk("Transaction updated successfully", updated));
+  } catch (e) {
+    console.error("Error updating transaction: ", e);
+    return res.status(500).json(helper.responseError(e));
+  }
 };
 
-const totalBalance = function totalExpense(req, res) {
-  const balance = getBalance();
-  return res.json({ totalBalance: balance });
+const deleteTxn = async (req, res) => {
+  const id = req.params.id;
+  try {
+    await deleteTransaction(id);
+    return res
+      .status(200)
+      .json(helper.responseOk("Transaction deleted successfully"));
+  } catch (e) {
+    console.error("Error deleting transaction: ", e);
+    return res.status(500).json(helper.responseError(e));
+  }
 };
 
-const totalExpense = function totalExpense(req, res) {
-  const tExpense = getExpense();
-  return res.json({ totalExpense: tExpense });
+const totalBalance = async (req, res) => {
+  try {
+    const balance = await getBalance();
+    return res.status(200).json(helper.responseOk("Total Balance", balance));
+  } catch (e) {
+    console.error("Cannot get total balance: ", e);
+    return res.status(500).json(helper.responseError(e));
+  }
 };
 
-const totalIncome = function totalIncome(req, res) {
-  const tIncome = getIncome();
-  return res.json({ totalIncome: tIncome });
+const totalExpense = async (req, res) => {
+  try {
+    const tExpense = await getExpense();
+    return res.status(200).json(helper.responseOk("Total Expense", tExpense));
+  } catch (e) {
+    console.error("Cannot get total expense: ", e);
+    return res.status(500).json(helper.responseError(e));
+  }
+};
+
+const totalIncome = async (req, res) => {
+  try {
+    const tIncome = await getIncome();
+    return res.status(200).json(helper.responseOk("Total Income", tIncome));
+  } catch (e) {
+    console.error("Cannot get total income: ", e);
+    return res.status(500).json(helper.responseError(e));
+  }
 };
 
 module.exports = {
