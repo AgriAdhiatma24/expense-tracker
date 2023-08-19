@@ -1,11 +1,9 @@
-import express from "express";
-import { PORT } from "./src/utils/constants.js";
-import { appView } from "./src/views/expenses-app.view.js";
-import bodyParser from "body-parser";
+const express = require("express");
+const { PORT } = require("./src/utils/constants.js");
+const appView = require("./src/views/expenses-app.view.js");
 
 const app = express();
 app.use(express.json());
-// app.use(bodyParser({ extended: false }));
 app.use(appView);
 
 app.use((req, res, next) => {
@@ -18,7 +16,7 @@ app.use((err, req, res, next) => {
   res.locals.error = err;
   const status = err.status || 500;
   res.status(status);
-  res.json({error: "ERROR"});
+  res.json({ error: "ERROR" });
 });
 
 app.listen(PORT, () => {

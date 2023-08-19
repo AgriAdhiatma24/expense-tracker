@@ -1,4 +1,4 @@
-import {
+const {
   loadTransaction,
   addTransaction,
   updateTransaction,
@@ -6,8 +6,7 @@ import {
   getBalance,
   getExpense,
   getIncome,
-} from "../models/expenses-app.model.js";
-import { responseOk, responseError } from "../utils/restResp.helper.js";
+} = require("../models/expenses-app.model.js");
 
 const getAllTxn = function getAllTxn(req, res) {
   const transaction = loadTransaction();
@@ -18,14 +17,6 @@ const addTxn = function addTxn(req, res) {
   addTransaction(req.body);
   return res.status(201).json({ Created: "Successfully" });
 };
-
-// const updateTxn = function updateTxn(req, res) {
-//   const id = req.params["id"];
-//   const body = req.body;
-
-//   updateTransaction(id, body.date, body.type, body.amount, body.details);
-//   return res.status(204).json({ Updated: "Successfully" });
-// };
 
 const updateTxn = function updateTxn(req, res) {
   // const id = req.params["id"];
@@ -50,7 +41,7 @@ const deleteTxn = function deletedTxn(req, res) {
 
 const totalBalance = function totalExpense(req, res) {
   const balance = getBalance();
-  return res.json({ total: balance });
+  return res.json({ totalBalance: balance });
 };
 
 const totalExpense = function totalExpense(req, res) {
@@ -60,10 +51,10 @@ const totalExpense = function totalExpense(req, res) {
 
 const totalIncome = function totalIncome(req, res) {
   const tIncome = getIncome();
-  return res.json({ totalExpense: tIncome });
+  return res.json({ totalIncome: tIncome });
 };
 
-export {
+module.exports = {
   getAllTxn,
   addTxn,
   updateTxn,

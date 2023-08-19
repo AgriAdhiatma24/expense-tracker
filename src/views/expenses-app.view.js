@@ -1,5 +1,6 @@
-import express from "express";
-import {
+const express = require("express");
+
+const {
   getAllTxn,
   addTxn,
   updateTxn,
@@ -7,8 +8,8 @@ import {
   totalBalance,
   totalExpense,
   totalIncome,
-} from "../controllers/expenses-app.controller.js";
-import { API_PATH } from "../utils/constants.js";
+} = require("../controllers/expenses-app.controller.js");
+const { API_PATH } = require("../utils/constants.js");
 
 const appView = express();
 const TRANSACTION_PATH_V1 = `${API_PATH}/v1/transaction`;
@@ -22,4 +23,4 @@ appView.get(`${TRANSACTION_PATH_V1}/transactions/balance`, totalBalance);
 appView.get(`${TRANSACTION_PATH_V1}/transactions/income`, totalIncome);
 appView.get(`${TRANSACTION_PATH_V1}/transactions/expense`, totalExpense);
 
-export { appView };
+module.exports = appView;

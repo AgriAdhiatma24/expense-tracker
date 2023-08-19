@@ -1,4 +1,4 @@
-import * as fs from "fs";
+const fs = require("fs");
 
 const loadTransaction = () => {
   const file = fs.readFileSync("dummy/transactions.json", "utf-8");
@@ -16,22 +16,8 @@ const addTransaction = (transaction) => {
   newTransaction(transactions);
 };
 
-// const updateTransaction = (id, updatedData) => {
-//   const transactions = loadTransaction();
-//   for (let i = 0; i < transactions.length; i++) {
-//     if (transactions[i].id === id) {
-//       const updatedTransaction = () => ({ ...transactions[i], ...updatedData });
-//       transactions.push(updatedTransaction());
-//       delete transactions[i];
-//       newTransaction(transactions);
-//       return transactions;
-//     }
-//   }
-//   return null;
-// };
-
 const updateTransaction = (id, updatedData) => {
-  const transactions = loadTransaction();
+  let transactions = loadTransaction();
   transactions = transactions.filter((transaction) => {
     if (transaction.id === id) {
       const updatedTransaction = { ...transaction, ...updatedData };
@@ -47,31 +33,6 @@ const updateTransaction = (id, updatedData) => {
   });
   return transactions.length > 0 ? transactions : null;
 };
-
-// const updateTransaction = (id, updatedData) => {
-//   const transactions = loadTransaction();
-
-//   const updatedTransactions = transactions.map((transaction) => {
-//     if (transaction.id === id) {
-//       return { ...transaction, ...updatedData };
-//     }
-//     return transaction;
-//   });
-//   newTransaction(updatedTransactions);
-//   return updatedTransactions.length > 0 ? updatedTransactions : null;
-// };
-
-// const deleteTransaction = (id) => {
-//   const transactions = loadTransaction();
-//   const deletedTransaction = transactions.find(txn => txn.id === id);
-
-//   if (deletedTransaction) {
-//     transactions = transactions.filter((txn) => txn.id !== id);
-//     newTransaction(transactions);
-
-//   }
-//   return deletedTransaction || null;
-// };
 
 const deleteTransaction = (id) => {
   const transactions = loadTransaction();
@@ -120,7 +81,7 @@ const getBalance = () => {
   return balance;
 };
 
-export {
+module.exports = {
   loadTransaction,
   addTransaction,
   updateTransaction,
