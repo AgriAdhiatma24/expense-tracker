@@ -124,6 +124,14 @@ body {
   gap: 1.8rem;
 }
 
+.container-form {
+  display: grid;
+  grid-template-columns: 14rem auto;
+  margin: 0 auto;
+  width: 96%;
+  gap: 1.8rem;
+}
+
 /* =========Sidebar========= */
 aside {
   height: 100vh;
@@ -402,7 +410,7 @@ main .transaction-table a {
   margin-bottom: 1rem;
 }
 
-.right-side .add-new-transaction .add-transaction div {
+.right-side .add-new-transaction .add-transaction a {
   display: flex;
   border: 2px dashed var(--color-primary);
   padding: 1.4rem var(--card-padding);
@@ -414,7 +422,7 @@ main .transaction-table a {
   transition: all 300ms ease;
 }
 
-.right-side .add-new-transaction .add-transaction div:hover {
+.right-side .add-new-transaction .add-transaction a:hover {
   background: var(--color-primary);
   color: white;
 }
@@ -492,6 +500,57 @@ select {
 .right-side .form-style input[type="submit"]:hover {
   background: var(--color-primary-variant);
   box-shadow: none;
+  cursor: pointer;
+}
+
+
+/* This input[xxxx] no needed*/
+.right-side .form-style input[type="button"] {
+  background: var(--color-info-light);
+  /* width: 5.2rem; */
+  /* margin-left: 1rem; */
+  padding: 8px 15px;
+  border: none;
+  color: var(--color-white);
+  border-radius: var(--border-radius-2);
+}
+
+.right-side .form-style input[type="button"]:hover {
+  background: var(--color-info-dark);
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.right-side .form-style button.submit {
+  background: var(--color-primary);
+  /* width: 5.2rem; */
+  /* margin-left: 1rem; */
+  padding: 8px 15px;
+  border: none;
+  color: var(--color-white);
+  border-radius: var(--border-radius-2);
+}
+
+.right-side .form-style button.submit:hover {
+  background: var(--color-primary-variant);
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.right-side .form-style button.cancel {
+  background: var(--color-info-light);
+  /* width: 5.2rem; */
+  margin-left: 1rem;
+  padding: 8px 15px;
+  border: none;
+  color: var(--color-white);
+  border-radius: var(--border-radius-2);
+}
+
+.right-side .form-style button.cancel:hover {
+  background: var(--color-info-dark);
+  box-shadow: none;
+  cursor: pointer;
 }
 
 .right-side .form-style .required {

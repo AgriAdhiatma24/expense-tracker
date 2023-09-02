@@ -1,8 +1,10 @@
 const express = require("express");
 const { PORT } = require("./src/utils/constants.js");
 const appView = require("./src/views/expenses-app.view.js");
+const cors = require("cors");
 
 const app = express();
+app.use(cors({ origin: "*" }));
 app.use(express.json());
 app.use(appView);
 

@@ -85,27 +85,27 @@
 
         <!-- INSIGHT CARD -->
         <div class="insight">
-          <div class="balance">
+          <div class="balance" id="balance">
             <span class="material-symbols-outlined">
               account_balance_wallet
             </span>
-            <div class="info">
+            <div class="info" id="info-balance">
               <h3>Total Balance</h3>
               <h1>Rp.-10.000</h1>
             </div>
             <small class="text-muted">Last 24 hours</small>
           </div>
-          <div class="income">
+          <div class="income" id="income">
             <span class="material-symbols-outlined"> north_east </span>
-            <div class="info">
+            <div class="info" id="info-income">
               <h3>Total Income</h3>
               <h1>Rp.10.000</h1>
             </div>
             <small class="text-muted">Last 24 hours</small>
           </div>
-          <div class="expenses">
+          <div class="expenses" id="expenses">
             <span class="material-symbols-outlined"> south_west </span>
-            <div class="info">
+            <div class="info" id="info-expenses">
               <h3>Total Expenses</h3>
               <h1>Rp.20.000</h1>
             </div>
@@ -114,7 +114,7 @@
         </div>
 
         <!-- Transaction History Table-->
-        <div class="transaction-table">
+        <div id="transaction-table" class="transaction-table">
           <h2>List of Transaction</h2>
           <table>
             <thead>
@@ -122,54 +122,12 @@
                 <th>No</th>
                 <th>Date</th>
                 <th>Amount</th>
+                <th>Type</th>
                 <th>Description</th>
                 <th>Action</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>Row Content</td>
-                <td>Row Content</td>
-                <td>Row Content</td>
-                <td>Row Content</td>
-                <td>
-                  <a href="" class="edit"
-                    ><span class="material-symbols-outlined"> edit </span></a
-                  >
-                  <a href="" class="delete"
-                    ><span class="material-symbols-outlined"> delete </span></a
-                  >
-                </td>
-              </tr>
-              <tr>
-                <td>Row Content</td>
-                <td>Row Content</td>
-                <td>Row Content</td>
-                <td>Row Content</td>
-                <td>
-                  <a href="" class="edit"
-                    ><span class="material-symbols-outlined"> edit </span></a
-                  >
-                  <a href="" class="delete"
-                    ><span class="material-symbols-outlined"> delete </span></a
-                  >
-                </td>
-              </tr>
-              <tr>
-                <td>Row Content</td>
-                <td>Row Content</td>
-                <td>Row Content</td>
-                <td>Row Content</td>
-                <td>
-                  <a href="" class="edit"
-                    ><span class="material-symbols-outlined"> edit </span></a
-                  >
-                  <a href="" class="delete"
-                    ><span class="material-symbols-outlined"> delete </span></a
-                  >
-                </td>
-              </tr>
-            </tbody>
+            <tbody id="table-body"></tbody>
           </table>
           <a href="#">Show All</a>
         </div>
@@ -183,7 +141,9 @@
             <span class="material-symbols-outlined"> menu </span>
           </button>
           <div class="theme-toggler">
-            <span class="material-symbols-outlined active light-mode"> light_mode </span>
+            <span class="material-symbols-outlined active light-mode">
+              light_mode
+            </span>
             <span class="material-symbols-outlined dark-mode"> dark_mode </span>
           </div>
           <div class="account-info">
@@ -199,57 +159,26 @@
         <div class="add-new-transaction">
           <h2>New Transaction</h2>
           <div class="add-transaction" id="add-transaction">
-            <div>
+            <!-- <div>
               <span class="material-symbols-outlined"> add </span>
               <h3>Add Transaction</h3>
-            </div>
-          </div>
-
-          <!-- Input Form -->
-          <div class="transaction-form">
-            <form>
-              <ul class="form-style">
-                <li>
-                  <label>Date <span class="required">*</span></label>
-                  <div class="form-date">
-                    <input class="text-muted" type="date" />
-                  </div>
-                </li>
-                <li>
-                  <label>Type <span class="required">*</span></label>
-                  <select name="field4" class="field-long text-muted">
-                    <option value="Income">Income</option>
-                    <option value="Expense">Expense</option>
-                  </select>
-                </li>
-                <li>
-                  <label>Amount <span class="required">*</span></label
-                  ><input
-                    type="text"
-                    name="field1"
-                    class="field-long"
-                    placeholder="Enter Amount"
-                  />
-                </li>
-                <li>
-                  <label>Details <span class="required">*</span></label>
-                  <textarea
-                    name="field5"
-                    id="field5"
-                    class="field-long field-textarea"
-                    placeholder="Enter Details"
-                  ></textarea>
-                </li>
-                <li>
-                  <input type="submit" value="Submit" />
-                </li>
-              </ul>
-            </form>
+            </div> -->
+            <a href="form.html">
+              <span class="material-symbols-outlined"> add </span>
+              <h3>Add Transaction</h3>
+            </a>
           </div>
         </div>
       </div>
       <!-- Right Section End -->
     </div>
-    <script src="./scripts.js"></script>
+    <script src="./script/styling.js"></script>
+    <script src="./script/index/scripts.js"></script>
+    <script>
+      getAllTransactions();
+      getBalance();
+      getIncome();
+      getExpenses();
+    </script>
   </body>
 </html>
