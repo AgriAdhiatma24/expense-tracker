@@ -1,5 +1,6 @@
 const {
   loadTransaction,
+  getSingleTransaction,
   addTransaction,
   updateTransaction,
   deleteTransaction,
@@ -20,6 +21,19 @@ getAllTxn = async (req, res) => {
       );
   } catch (e) {
     console.error("Error fetching transactions: ", e);
+    return res.status(500).json(helper.responseError(e));
+  }
+};
+
+getOneTxn = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const transaction = await getSingleTransaction(id);
+    return res
+      .status(200)
+      .json(helper.responseOk("Successfuly fetching transaction", transaction));
+  } catch (e) {
+    console.error("Error fetching transaction: ", e);
     return res.status(500).json(helper.responseError(e));
   }
 };
@@ -93,6 +107,7 @@ const totalIncome = async (req, res) => {
 
 module.exports = {
   getAllTxn,
+  getOneTxn,
   addTxn,
   updateTxn,
   deleteTxn,

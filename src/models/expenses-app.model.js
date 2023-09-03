@@ -4,6 +4,10 @@ const loadTransaction = async () => {
   return await db.select("*").from("transactions");
 };
 
+const getSingleTransaction = async (id) => {
+  return await db.select("*").from("transactions").where({ id }).first();
+};
+
 const newTransaction = async (transactions) => {
   return await db("transactions").insert(transactions);
 };
@@ -61,6 +65,7 @@ const getBalance = async () => {
 
 module.exports = {
   loadTransaction,
+  getSingleTransaction,
   addTransaction,
   updateTransaction,
   deleteTransaction,

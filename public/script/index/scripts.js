@@ -47,6 +47,12 @@ const showPage = async () => {
       }
     });
   });
+
+  // Handle Edit Button
+  const editButton = document
+    .getElementById("table-body")
+    .querySelectorAll("#edit");
+  console.log(editButton);
 };
 
 const tableGenerator = (id, no, date, amount, type, description) => `
@@ -56,7 +62,7 @@ const tableGenerator = (id, no, date, amount, type, description) => `
      <td>${amount}</td>
      <td>${type}</td>
      <td>${description}</td>
-     <td><a href="" class="edit" id="edit"
+     <td><a href="form-edit.html?id=${id}" class="edit" id="edit"
      ><span class="material-symbols-outlined"> edit </span>
      </a>
      <a href="" class="delete" id="delete" data-transaction-id="${id}"

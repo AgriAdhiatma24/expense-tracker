@@ -62,14 +62,15 @@ handleSubmit = async (e) => {
     method: "POST",
     headers: myHeaders,
     body: transactionData,
-    // redirect: "follow",
   };
 
   fetch("http://localhost:9000/api/v1/transaction/transactions", requestOptions)
     .then((response) => response.text())
-    .then((result) => console.log(result))
+    .then((result) => {
+      console.log(result);
+      window.location.href = "index.html";
+    })
     .catch((error) => console.log("error", error));
-  // window.location.href = "./index.html";
 };
 submitButton.addEventListener("click", handleSubmit);
 
