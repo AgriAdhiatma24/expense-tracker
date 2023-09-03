@@ -26,7 +26,7 @@ const getIncome = async () => {
   const transactions = await loadTransaction();
   let totalIncome = 0;
   transactions.forEach((txn) => {
-    if (txn.type === "income") {
+    if (txn.type === "income" || txn.type === "Income") {
       totalIncome += txn.amount;
     }
   });
@@ -37,7 +37,7 @@ const getExpense = async () => {
   const transactions = await loadTransaction();
   let totalExpense = 0;
   transactions.forEach((txn) => {
-    if (txn.type === "expense") {
+    if (txn.type === "expense" || txn.type === "Expense") {
       totalExpense += txn.amount;
     }
   });
@@ -49,9 +49,9 @@ const getBalance = async () => {
   let totalIncome = 0;
   let totalExpense = 0;
   transactions.forEach((txn) => {
-    if (txn.type === "income") {
+    if (txn.type === "income" || txn.type === "Income") {
       totalIncome += txn.amount;
-    } else if (txn.type === "expense") {
+    } else if (txn.type === "expense" || txn.type === "Expense") {
       totalExpense += txn.amount;
     }
   });

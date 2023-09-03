@@ -1,14 +1,16 @@
 // Fetching All Transactions
 const tableWrapper = document.getElementById("table-body");
-const getAllTransactions = async () => {
-  const resp = await fetch(
+const showPage = async () => {
+  //Get All Transaction
+  const getTransactionResponse = await fetch(
     "http://localhost:9000/api/v1/transaction/transactions"
   );
-  const jsonResp = await resp.json();
+  const jsonResp = await getTransactionResponse.json();
   const transaction = jsonResp.data;
   tableWrapper.innerHTML = "";
   transaction.forEach((txn, idx) => {
     const tableInfo = tableGenerator(
+      txn.id,
       idx + 1,
       txn.date,
       txn.amount,
@@ -18,19 +20,46 @@ const getAllTransactions = async () => {
 
     tableWrapper.innerHTML += tableInfo;
   });
+
+  // Handle Delete Button
+  const deleteButton = document
+    .getElementById("table-body")
+    .querySelectorAll("#delete");
+
+  deleteButton.forEach((d) => {
+    d.addEventListener("click", async (e) => {
+      e.preventDefault();
+      const transactionId = d.getAttribute("data-transaction-id");
+      const isConfirmed = window.confirm("Are you sure want to delete this?");
+
+      if (isConfirmed) {
+        try {
+          const deleteResp = await fetch(
+            `http://localhost:9000/api/v1/transaction/transactions/${transactionId}`,
+            {
+              method: "DELETE",
+            }
+          );
+          window.location.reload();
+        } catch (e) {
+          console.log("Error Occured : ", e);
+        }
+      }
+    });
+  });
 };
 
-const tableGenerator = (no, date, amount, type, description) => `
-  <tr>
+const tableGenerator = (id, no, date, amount, type, description) => `
+<tr>
     <td>${no}</td>
      <td>${date}</td>
      <td>${amount}</td>
      <td>${type}</td>
      <td>${description}</td>
-     <td><a href="" class="edit"
+     <td><a href="" class="edit" id="edit"
      ><span class="material-symbols-outlined"> edit </span>
      </a>
-     <a href="" class="delete"
+     <a href="" class="delete" id="delete" data-transaction-id="${id}"
      ><span class="material-symbols-outlined"> delete </span>
      </a></td>
    </tr>`;
@@ -95,4 +124,3 @@ const getExpenses = async () => {
 const expenseGenerator = (expense) => `
   <h3>Total Expense</h3>
   <h1>${currencyFormatter(expense)}</h1>`;
-

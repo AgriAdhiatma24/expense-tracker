@@ -12,7 +12,7 @@ formatDate = (date) => {
   if (isNaN(newDate.getTime())) {
     return "Invalid Date";
   }
-  
+
   // Get day, month, and year components from the date object
   const day = String(newDate.getDate()).padStart(2, "0");
   const month = String(newDate.getMonth() + 1).padStart(2, "0"); // Months are 0-based, so add 1
@@ -24,10 +24,27 @@ formatDate = (date) => {
 
 // Function to handle form submission
 handleSubmit = async (e) => {
-  e.preventDefault();
+  // e.preventDefault();
+  let isValid = true;
+  const requiredInput = form.querySelectorAll("[required]");
+  const errorMessage = form.querySelectorAll(".error-message");
+
+  requiredInput.forEach((input, idx) => {
+    if (!input.value) {
+      isValid = false;
+      errorMessage[idx].style.display = "block";
+    } else {
+      errorMessage[idx].style.display = "none";
+    }
+  });
+  isValid = true;
+  if (isValid) {
+    e.preventDefault();
+  }
+
   // Retrieve values from form elements
-  const date = dateInput.value;
-  const type = typeSelect.value;
+  const date = formatDate(dateInput.value);
+  const type = typeSelect.value.toLowerCase();
   const amount = parseInt(amountInput.value);
   const description = textArea.value;
 
@@ -37,7 +54,6 @@ handleSubmit = async (e) => {
     amount,
     description,
   });
-  console.log(transactionData);
 
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
@@ -46,13 +62,14 @@ handleSubmit = async (e) => {
     method: "POST",
     headers: myHeaders,
     body: transactionData,
-    redirect: "follow",
+    // redirect: "follow",
   };
 
   fetch("http://localhost:9000/api/v1/transaction/transactions", requestOptions)
     .then((response) => response.text())
     .then((result) => console.log(result))
     .catch((error) => console.log("error", error));
+  // window.location.href = "./index.html";
 };
 submitButton.addEventListener("click", handleSubmit);
 
@@ -62,5 +79,27 @@ const cancelBtn = document
   .querySelector("#cancel-button");
 cancelBtn.addEventListener("click", (e) => {
   e.preventDefault();
-  this.window.location.href = "./index.html";
+  window.location.href = "./index.html";
 });
+
+// Handle Empty Form
+// const form = document.getElementById("form");
+// form.addEventListener("submit", (e) => {
+//   let isValid = true;
+//   const requiredInput = form.querySelectorAll("[required]");
+//   console.log(requiredInput);
+//   const errorMessage = form.querySelectorAll(".error-message");
+//   console.log(errorMessage);
+
+//   requiredInput.forEach((input, idx) => {
+//     if (!input.value) {
+//       isValid = false;
+//       errorMessage[idx].style.display = "block";
+//     } else {
+//       errorMessage[idx].style.display = "none";
+//     }
+//   });
+//   if (isValid) {
+//     e.preventDefault();
+//   }
+// });
