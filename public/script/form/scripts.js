@@ -18,7 +18,7 @@ formatDate = (date) => {
   const month = String(newDate.getMonth() + 1).padStart(2, "0"); // Months are 0-based, so add 1
   const year = newDate.getFullYear();
   // Create the formatted date string in MM/DD/YYYY format
-  const formattedDate = `${month}/${day}/${year}`;
+  const formattedDate = `${day}/${month}/${year}`;
   return formattedDate;
 };
 
@@ -44,7 +44,7 @@ handleSubmit = async (e) => {
 
   // Retrieve values from form elements
   const date = formatDate(dateInput.value);
-  const type = typeSelect.value.toLowerCase();
+  const type = typeSelect.value;
   const amount = parseInt(amountInput.value);
   const description = textArea.value;
 

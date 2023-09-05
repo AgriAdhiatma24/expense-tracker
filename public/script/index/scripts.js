@@ -47,12 +47,6 @@ const showPage = async () => {
       }
     });
   });
-
-  // Handle Edit Button
-  const editButton = document
-    .getElementById("table-body")
-    .querySelectorAll("#edit");
-  console.log(editButton);
 };
 
 const tableGenerator = (id, no, date, amount, type, description) => `

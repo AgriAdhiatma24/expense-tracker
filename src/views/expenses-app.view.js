@@ -16,7 +16,7 @@ const appView = express();
 const TRANSACTION_PATH_V1 = `${API_PATH}/v1/transaction`;
 
 appView.get(`${TRANSACTION_PATH_V1}/transactions`, getAllTxn);
-appView.get(`${TRANSACTION_PATH_V1}/transactions/:id`, getOneTxn);
+appView.get(`${TRANSACTION_PATH_V1}/transaction/:id`, getOneTxn);
 appView.post(`${TRANSACTION_PATH_V1}/transactions`, addTxn);
 appView.put(`${TRANSACTION_PATH_V1}/transactions/:id`, updateTxn);
 appView.delete(`${TRANSACTION_PATH_V1}/transactions/:id`, deleteTxn);
