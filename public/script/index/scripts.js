@@ -47,6 +47,9 @@ const showPage = async () => {
       }
     });
   });
+  getBalance();
+  getIncome();
+  getExpenses();
 };
 
 const tableGenerator = (id, no, date, amount, type, description) => `
@@ -72,6 +75,7 @@ const currencyFormatter = (value) => {
     minimumFractionDigits: 0,
   }).format(value);
 };
+
 // Fetching Insight Balance
 const balanceWrapper = document.getElementById("info-balance");
 const getBalance = async () => {
