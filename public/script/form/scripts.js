@@ -32,29 +32,38 @@ handleSubmit = async (e) => {
   requiredInput.forEach((input, idx) => {
     if (!input.value) {
       isValid = false;
-      errorMessage[idx].style.display = "block";
+      // errorMessage[idx].style.display = "block";
     } else {
-      errorMessage[idx].style.display = "none";
+      // errorMessage[idx].style.display = "none";
     }
   });
-  isValid = true;
   if (isValid) {
     e.preventDefault();
   }
 
   // Retrieve values from form elements
-  const date = formatDate(dateInput.value);
+  // const date = formatDate(dateInput.value);
+  const date = dateInput.value;
   const type = typeSelect.value;
   const amount = parseInt(amountInput.value);
-  const description = textArea.value;
+  const description = () => {
+    if (textArea.value === "") {
+      return null;
+    }
+    return textArea.value;
+  };
+  const desc = description();
+  console.log(date);
+  console.log(type);
+  console.log(amount);
+  console.log(desc);
 
   const transactionData = JSON.stringify({
     date,
     type,
     amount,
-    description,
+    description: desc,
   });
-
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
 
@@ -64,13 +73,30 @@ handleSubmit = async (e) => {
     body: transactionData,
   };
 
-  fetch("http://localhost:9000/api/v1/transaction/transactions", requestOptions)
-    .then((response) => response.text())
-    .then((result) => {
-      console.log(result);
-      window.location.href = "index.html";
-    })
-    .catch((error) => console.log("error", error));
+  // fetch("http://localhost:9000/api/v1/transaction/transactions", requestOptions)
+  //   .then((response) => response.text())
+  //   .then((result) => {
+  //     console.log(result);
+  //     // window.location.href = "index.html";
+  //   })
+  //   .catch((error) => console.log("error", error));
+  const submitFormRes = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:9000/api/v1/transaction/transactions",
+        requestOptions
+      );
+      const jsonResp = await response.json();
+      console.log(jsonResp);
+      console.log(response);
+      if (response.status === 201) {
+        window.location.href = "index.html";
+      }
+    } catch (e) {
+      console.error("Error:", e);
+    }
+  };
+  submitFormRes();
 };
 submitButton.addEventListener("click", handleSubmit);
 
