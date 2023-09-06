@@ -6,9 +6,13 @@ const showPage = async () => {
     "http://localhost:9000/api/v1/transaction/transactions"
   );
   const jsonResp = await getTransactionResponse.json();
-  const transaction = jsonResp.data;
+  const transactions = jsonResp.data;
+  transactions.sort((a, b) => {
+    return new Date(a.date) - new Date(b.date);
+  });
+  
   tableWrapper.innerHTML = "";
-  transaction.forEach((txn, idx) => {
+  transactions.forEach((txn, idx) => {
     const tableInfo = tableGenerator(
       txn.id,
       idx + 1,
@@ -52,11 +56,20 @@ const showPage = async () => {
   getExpenses();
 };
 
+function formatCurrencyInput(amount) {
+  const formattedValue = Number(amount).toLocaleString("id-ID", {
+    style: "currency",
+    currency: "IDR", // You can change the currency code as needed
+    minimumFractionDigits: 2,
+  });
+  return formattedValue;
+}
+
 const tableGenerator = (id, no, date, amount, type, description) => `
 <tr>
     <td>${no}</td>
      <td>${date}</td>
-     <td>${amount}</td>
+     <td>${formatCurrencyInput(amount)}</td>
      <td>${type}</td>
      <td>${description}</td>
      <td><a href="form-edit.html?id=${id}" class="edit" id="edit"
