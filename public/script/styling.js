@@ -18,3 +18,15 @@ themeToggler.addEventListener("click", () => {
   themeToggler.querySelector(".light-mode").classList.toggle("active");
   themeToggler.querySelector(".dark-mode").classList.toggle("active");
 });
+
+const sideMenu = document.querySelector("aside");
+const menuBtn = document.querySelector("#menu-btn");
+const closeBtn = document.querySelector("#close-btn");
+
+menuBtn.addEventListener("click", () => {
+  sideMenu.style.display = "block";
+});
+
+closeBtn.addEventListener("click", () => {
+  sideMenu.style.display = "none";
+});
