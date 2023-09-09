@@ -1,6 +1,9 @@
 # Expense Tracker App
 Simple expense tracker APP
-![image](https://github.com/AgriAdhiatma24/expense-tracker/assets/55662573/7fdbcb4a-0375-42e7-b2db-999e0d3fef8f)
+
+<div>
+  <img src=./.github/expense-tracker.png >
+</div>
 
 ## Tools
 + HTML
